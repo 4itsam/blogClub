@@ -160,10 +160,26 @@ class Login extends StatelessWidget {
         ),
         SizedBox(height: 20),
         Row(
+          spacing: 10,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Forgot your Password?"),
-            TextButton(onPressed: () {}, child: Text("Reset Here")),
+            Text(
+              "Forgot your Password?",
+              style: themeData.textTheme.displayMedium!.apply(
+                fontSizeDelta: -8,
+                fontWeightDelta: -2,
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Text(
+                "Reset Here",
+                style: themeData.textTheme.displayMedium!.apply(
+                  fontSizeDelta: -6,
+                  color: primaryColor,
+                ),
+              ),
+            ),
           ],
         ),
         SizedBox(height: 16),
@@ -232,7 +248,7 @@ class SignUp extends StatelessWidget {
         SizedBox(height: 30),
         PasswordTExtFeild(themeData: themeData, lable: "Password"),
         SizedBox(height: 30),
-        PasswordTExtFeild(themeData: themeData, lable: "re-Enter Password"),
+        PasswordTExtFeild(themeData: themeData, lable: "Confirm Password"),
         SizedBox(height: 36),
         ElevatedButton(
           style: ButtonStyle(
