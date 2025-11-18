@@ -4,15 +4,13 @@ import "package:myfile/gen/fonts.gen.dart";
 import "package:myfile/splash.dart";
 
 void main() {
-  runApp(MyApp());
   WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-      statusBarIconBrightness: Brightness.light,
       systemNavigationBarColor: Colors.white,
       systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarBrightness: Brightness.light,
     ),
   );
 }
@@ -28,6 +26,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
     return MaterialApp(
       theme: ThemeData(
         textTheme: TextTheme(
@@ -68,7 +67,26 @@ class MyApp extends StatelessWidget {
             fontSize: 20,
             fontWeight: FontWeight.w900,
           ),
+          displayMedium: TextStyle(
+            color: Color(0xff0D253C),
+            fontFamily: FontFamily.avenir,
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+          ),
+          displaySmall: TextStyle(
+            fontFamily: FontFamily.avenir,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: secondaryTextColor,
+          ),
+          labelLarge: TextStyle(
+            color: themeData.colorScheme.onPrimary,
+            fontFamily: FontFamily.avenir,
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+          ),
         ),
+
         colorScheme: ColorScheme.light(
           primary: primaryColor,
           onPrimary: Colors.white,
