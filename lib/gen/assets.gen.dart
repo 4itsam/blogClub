@@ -37,12 +37,16 @@ class $AssetsImgBackgroundGen {
   AssetGenImage get onboarding =>
       const AssetGenImage('assets/img/background/onboarding.png');
 
+  /// File path: assets/img/background/singlePost.png
+  AssetGenImage get singlePost =>
+      const AssetGenImage('assets/img/background/singlePost.png');
+
   /// File path: assets/img/background/splash.png
   AssetGenImage get splash =>
       const AssetGenImage('assets/img/background/splash.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [onboarding, splash];
+  List<AssetGenImage> get values => [onboarding, singlePost, splash];
 }
 
 class $AssetsImgIconsGen {
@@ -56,6 +60,10 @@ class $AssetsImgIconsGen {
   AssetGenImage get articlesSelected =>
       const AssetGenImage('assets/img/icons/ArticlesSelected.png');
 
+  /// File path: assets/img/icons/Bookmark.svg
+  SvgGenImage get bookmark =>
+      const SvgGenImage('assets/img/icons/Bookmark.svg');
+
   /// File path: assets/img/icons/Facebook.png
   AssetGenImage get facebook =>
       const AssetGenImage('assets/img/icons/Facebook.png');
@@ -63,6 +71,9 @@ class $AssetsImgIconsGen {
   /// File path: assets/img/icons/Google.png
   AssetGenImage get google =>
       const AssetGenImage('assets/img/icons/Google.png');
+
+  /// File path: assets/img/icons/Grid.svg
+  SvgGenImage get grid => const SvgGenImage('assets/img/icons/Grid.svg');
 
   /// File path: assets/img/icons/Home.png
   AssetGenImage get home => const AssetGenImage('assets/img/icons/Home.png');
@@ -88,6 +99,15 @@ class $AssetsImgIconsGen {
   /// File path: assets/img/icons/SearchSelected.png
   AssetGenImage get searchSelected =>
       const AssetGenImage('assets/img/icons/SearchSelected.png');
+
+  /// File path: assets/img/icons/Send.svg
+  SvgGenImage get send => const SvgGenImage('assets/img/icons/Send.svg');
+
+  /// File path: assets/img/icons/Table.svg
+  SvgGenImage get table => const SvgGenImage('assets/img/icons/Table.svg');
+
+  /// File path: assets/img/icons/Thumbs.svg
+  SvgGenImage get thumbs => const SvgGenImage('assets/img/icons/Thumbs.svg');
 
   /// File path: assets/img/icons/Twitter.png
   AssetGenImage get twitter =>
@@ -120,8 +140,10 @@ class $AssetsImgIconsGen {
   List<dynamic> get values => [
     articles,
     articlesSelected,
+    bookmark,
     facebook,
     google,
+    grid,
     home,
     homeSelected,
     logo,
@@ -129,6 +151,9 @@ class $AssetsImgIconsGen {
     menuSelected,
     search,
     searchSelected,
+    send,
+    table,
+    thumbs,
     twitter,
     category1,
     category2,

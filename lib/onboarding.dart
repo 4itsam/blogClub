@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:myfile/auth.dart';
 import 'package:myfile/data.dart';
 import 'package:myfile/gen/assets.gen.dart';
 import 'package:myfile/main.dart';
+import 'package:myfile/profile.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -125,7 +125,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               if (page == onboardingData.length - 1) {
                                 Navigator.of(context).pushReplacement(
                                   CupertinoDialogRoute(
-                                    builder: (context) => AuthScreen(),
+                                    builder: (context) => ProfileScreen(),
                                     context: context,
                                   ),
                                 );

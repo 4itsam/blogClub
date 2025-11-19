@@ -7,6 +7,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 3)).then((value) {
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
         CupertinoPageRoute(builder: (context) => OnboardingScreen()),
       );

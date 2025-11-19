@@ -22,7 +22,7 @@ final scaffoldBG = Color(0xffF7F9FF);
 final bottonNavigationBarColor = Color(0xff0047CC);
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +92,20 @@ class MyApp extends StatelessWidget {
           onPrimary: Colors.white,
           surface: scaffoldBG,
           onSurface: primaryTextColor,
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: scaffoldBG,
+          titleSpacing: 32,
+          actionsPadding: EdgeInsets.fromLTRB(0, 0, 32, 0),
+        ),
+        snackBarTheme: SnackBarThemeData(
+          backgroundColor: primaryTextColor,
+          actionTextColor: Colors.white,
+          contentTextStyle: TextStyle(
+            fontFamily: FontFamily.avenir,
+            fontWeight: FontWeight.w500,
+          ),
+          behavior: SnackBarBehavior.fixed,
         ),
       ),
       debugShowCheckedModeBanner: false,

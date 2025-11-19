@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
               ),
               StoryList(),
               MySlider(),
-              _PostList(),
+              PostList(),
               SizedBox(height: 60),
             ],
           ),
@@ -64,7 +64,7 @@ class MySlider extends StatelessWidget {
         itemCount: CategoryDataBase.categories.length,
         itemBuilder: (context, index, realIndex) {
           final category = CategoryDataBase.categories[index];
-          return _categoryItem(
+          return CategoryItem(
             category: category,
             index: index,
             start: realIndex == 0 ? 20 : 0,
@@ -87,8 +87,8 @@ class MySlider extends StatelessWidget {
   }
 }
 
-class _categoryItem extends StatelessWidget {
-  const _categoryItem({
+class CategoryItem extends StatelessWidget {
+  const CategoryItem({super.key,
     required this.category,
     required this.index,
     required this.start,
@@ -279,7 +279,9 @@ class UserStory extends StatelessWidget {
   }
 }
 
-class _PostList extends StatelessWidget {
+class PostList extends StatelessWidget {
+  const PostList({super.key});
+
   @override
   Widget build(BuildContext context) {
     final posts = PostDatabase.postData;
