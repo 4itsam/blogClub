@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myfile/article.dart';
 import 'package:myfile/caruser/carousel_slider.dart';
 import 'package:myfile/data.dart';
 import 'package:myfile/gen/assets.gen.dart';
@@ -88,7 +89,8 @@ class MySlider extends StatelessWidget {
 }
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key,
+  const CategoryItem({
+    super.key,
     required this.category,
     required this.index,
     required this.start,
@@ -317,84 +319,87 @@ class PostList extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Row(
-                spacing: 10,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadiusGeometry.circular(16),
-                    child: Image.asset(
-                      "assets/img/posts/small/${post.imageFileName}",
+              child: InkWell(
+                onTap: () => Navigator.of(context).push(CupertinoPageRoute(builder: (context) => ArticleScreen(),)),
+                child: Row(
+                  spacing: 10,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadiusGeometry.circular(16),
+                      child: Image.asset(
+                        "assets/img/posts/small/${post.imageFileName}",
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          post.title,
-                          style: TextStyle(
-                            fontFamily: FontFamily.avenir,
-                            color: primaryColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          post.caption,
-                          style: TextStyle(
-                            fontFamily: FontFamily.avenir,
-                            fontSize: 16,
-                            color: primaryTextColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Icon(
-                              CupertinoIcons.hand_thumbsup,
-                              size: 20,
-                              color: secondaryTextColor,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            post.title,
+                            style: TextStyle(
+                              fontFamily: FontFamily.avenir,
+                              color: primaryColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
                             ),
-                            SizedBox(width: 4),
-                            Text(
-                              post.likes,
-                              style: TextStyle(
-                                fontFamily: FontFamily.avenir,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 15,
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            post.caption,
+                            style: TextStyle(
+                              fontFamily: FontFamily.avenir,
+                              fontSize: 16,
+                              color: primaryTextColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Icon(
+                                CupertinoIcons.hand_thumbsup,
+                                size: 20,
+                                color: secondaryTextColor,
                               ),
-                            ),
-                            SizedBox(width: 15),
-                            Icon(
-                              CupertinoIcons.clock,
-                              size: 20,
-                              color: secondaryTextColor,
-                            ),
-                            SizedBox(width: 4),
-                            Text(post.time),
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.centerRight,
-                                margin: EdgeInsets.only(right: 10),
-                                child: Icon(
-                                  post.isBookMarked
-                                      ? CupertinoIcons.bookmark_fill
-                                      : CupertinoIcons.bookmark,
-                                  size: 20,
-                                  color: secondaryTextColor,
+                              SizedBox(width: 4),
+                              Text(
+                                post.likes,
+                                style: TextStyle(
+                                  fontFamily: FontFamily.avenir,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 15,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              SizedBox(width: 15),
+                              Icon(
+                                CupertinoIcons.clock,
+                                size: 20,
+                                color: secondaryTextColor,
+                              ),
+                              SizedBox(width: 4),
+                              Text(post.time),
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.centerRight,
+                                  margin: EdgeInsets.only(right: 10),
+                                  child: Icon(
+                                    post.isBookMarked
+                                        ? CupertinoIcons.bookmark_fill
+                                        : CupertinoIcons.bookmark,
+                                    size: 20,
+                                    color: secondaryTextColor,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },

@@ -13,6 +13,9 @@ class ProfileScreen extends StatelessWidget {
     final ThemeData themeData = Theme.of(context);
     final posts = PostDatabase.postData;
     return Scaffold(
+      persistentFooterButtons: [
+      ],
+      persistentFooterDecoration: BoxDecoration(color: scaffoldBG),
       appBar: AppBar(
         title: Text(
           "Profile",
@@ -369,6 +372,7 @@ class ProfileScreen extends StatelessWidget {
                         );
                       },
                     ),
+                    SizedBox(height: 60),
                   ],
                 ),
               ),

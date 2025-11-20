@@ -9,6 +9,8 @@ class ArticleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return Scaffold(
+      persistentFooterButtons: [],
+      persistentFooterDecoration: BoxDecoration(color: scaffoldBG),
       backgroundColor: scaffoldBG,
 
       floatingActionButton: InkWell(
@@ -17,6 +19,7 @@ class ArticleScreen extends StatelessWidget {
         child: Container(
           width: 111,
           height: 48,
+          margin: EdgeInsets.only(bottom: 50),
           decoration: BoxDecoration(
             color: primaryColor,
             borderRadius: BorderRadius.circular(12),

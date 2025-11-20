@@ -1,7 +1,9 @@
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
+import "package:myfile/article.dart";
 import "package:myfile/gen/fonts.gen.dart";
-import "package:myfile/splash.dart";
+import "package:myfile/home.dart";
+import "package:myfile/profile.dart";
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -109,13 +111,121 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: Stack(children: [Positioned.fill(child: SplashScreen())]),
+      home: MainScreen(),
+    );
+  }
+}
+
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+const int homeIndex = 0;
+const int articleIndex = 1;
+const int searchIndex = 2;
+const int menuIndex = 3;
+const double bottonNavigationBarHeight = 65;
+
+class _MainScreenState extends State<MainScreen> {
+  int selectedScreenIndex = 0;
+
+  late final map = {
+    homeIndex: homekey,
+    articleIndex: articlekey,
+    searchIndex: searchkey,
+    menuIndex: menukey,
+  };
+
+  GlobalKey<NavigatorState> homekey = GlobalKey();
+  GlobalKey<NavigatorState> articlekey = GlobalKey();
+  GlobalKey<NavigatorState> searchkey = GlobalKey();
+  GlobalKey<NavigatorState> menukey = GlobalKey();
+
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: IndexedStack(
+                index: selectedScreenIndex,
+                children: [
+                  Navigator(
+                    key: homekey,
+                    onGenerateRoute: (settings) =>
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                  ),
+                  Navigator(
+                    key: articlekey,
+                    onGenerateRoute: (settings) => MaterialPageRoute(
+                      builder: (context) => ArticleScreen(),
+                    ),
+                  ),
+                  Navigator(
+                    key: searchkey,
+                    onGenerateRoute: (settings) =>
+                        MaterialPageRoute(builder: (context) => SearchScreen()),
+                  ),
+                  Navigator(
+                    key: menukey,
+                    onGenerateRoute: (settings) => MaterialPageRoute(
+                      builder: (context) => ProfileScreen(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: BottonNavigationBar(
+                selectedIndex: selectedScreenIndex,
+                onTap: (index) {
+                  setState(() {
+                    selectedScreenIndex = index;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SearchScreen extends StatelessWidget {
+  const SearchScreen({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text(
+          "Search Screen",
+          style: Theme.of(context).textTheme.displayMedium,
+        ),
+      ),
     );
   }
 }
 
 class BottonNavigationBar extends StatelessWidget {
-  const BottonNavigationBar({super.key});
+  const BottonNavigationBar({
+    super.key,
+    required this.onTap,
+    required this.selectedIndex,
+  });
+
+  final Function(int index) onTap;
+  final int selectedIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +240,7 @@ class BottonNavigationBar extends StatelessWidget {
               left: 0,
               bottom: 0,
               child: Container(
-                height: 65,
+                height: bottonNavigationBarHeight,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: [
@@ -168,35 +278,48 @@ class BottonNavigationBar extends StatelessWidget {
             ),
             Positioned(
               bottom: 10,
-              right: 0,
-              left: 0,
+              right: 10,
+              left: 10,
               child: Row(
+                spacing: 10,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   BottonNavigationItem(
-                    iconFileName: "HomeSelected.png",
-                    activeIconeFileName: "Home.png",
+                    iconFileName: "Home.png",
+                    activeIconeFileName: "HomeSelected.png",
                     title: "Home",
-                    isSelected: true,
+                    isSelected: selectedIndex == homeIndex,
+                    onTap: () {
+                      onTap(homeIndex);
+                    },
                   ),
                   BottonNavigationItem(
                     iconFileName: "Articles.png",
-                    activeIconeFileName: "",
+                    activeIconeFileName: "ArticlesSelected.png",
                     title: "Articles",
-                    isSelected: false,
+                    isSelected: selectedIndex == articleIndex,
+                    onTap: () {
+                      onTap(articleIndex);
+                    },
                   ),
-                  SizedBox(width: 30),
+                  Expanded(child: SizedBox(width: 20)),
                   BottonNavigationItem(
                     iconFileName: "Search.png",
-                    activeIconeFileName: "",
+                    activeIconeFileName: "SearchSelected.png",
                     title: "Search",
-                    isSelected: false,
+                    isSelected: selectedIndex == searchIndex,
+                    onTap: () {
+                      onTap(searchIndex);
+                    },
                   ),
                   BottonNavigationItem(
                     iconFileName: "Menu.png",
-                    activeIconeFileName: "",
+                    activeIconeFileName: "MenuSelected.png",
                     title: "Menu",
-                    isSelected: false,
+                    isSelected: selectedIndex == menuIndex,
+                    onTap: () {
+                      onTap(menuIndex);
+                    },
                   ),
                 ],
               ),
@@ -213,6 +336,7 @@ class BottonNavigationItem extends StatelessWidget {
   final String activeIconeFileName;
   final String title;
   final bool isSelected;
+  final Function() onTap;
 
   const BottonNavigationItem({
     super.key,
@@ -220,33 +344,40 @@ class BottonNavigationItem extends StatelessWidget {
     required this.activeIconeFileName,
     required this.title,
     required this.isSelected,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: 2,
-      children: [
-        Image.asset("assets/img/icons/$iconFileName", height: 24),
-        Text(
-          title,
-          style: isSelected
-              ? TextStyle(
+    return Expanded(
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          child: Column(
+            spacing: 2,
+            children: [
+              Image.asset(
+                isSelected
+                    ? "assets/img/icons/$activeIconeFileName"
+                    : "assets/img/icons/$iconFileName",
+                height: isSelected ? 25 : 24,
+              ),
+              Text(
+                title,
+                style: TextStyle(
                   fontFamily: FontFamily.avenir,
-                  fontSize: 12,
-                  color: bottonNavigationBarColor,
-                  fontWeight: FontWeight.w600,
-                  decoration: TextDecoration.none,
-                )
-              : TextStyle(
-                  fontFamily: FontFamily.avenir,
-                  fontSize: 12,
-                  color: secondaryTextColor,
+                  fontSize: isSelected ? 12.5 : 12,
+                  color: isSelected
+                      ? bottonNavigationBarColor
+                      : secondaryTextColor,
                   fontWeight: FontWeight.w600,
                   decoration: TextDecoration.none,
                 ),
+              ),
+            ],
+          ),
         ),
-      ],
+      ),
     );
   }
 }
